@@ -18,6 +18,9 @@
 #include <linux/string.h>
 #include <linux/i2c.h>
 
+#ifdef pr_debug
+	#undef pr_debug
+#endif
 #define pr_debug pr_info
 
 #define pm8008_err(reg, message, ...) \
@@ -769,10 +772,7 @@ static int pm8008_regulator_i2c_probe(struct i2c_client *client,
 	const struct i2c_device_id *id)
 {
 	int rc = 0;
-	unsigned char val[5] = {0};
 	struct regmap *regmap;
-	struct pinctrl *ppinctrl;
-	struct pinctrl_state *pins_default;
 
 	pr_debug("pm8008_regulator_i2c_probe ++++ i2c addr 0x%x",client->addr);
 
@@ -916,10 +916,7 @@ static int pm8008_pmic_chip_i2c_probe(struct i2c_client *client,
 	const struct i2c_device_id *id)
 {
 	int rc = 0;
-	unsigned char val[5] = {0};
 	struct regmap *regmap;
-	struct pinctrl *ppinctrl;
-	struct pinctrl_state *pins_default;
 	struct pm8008_chip *chip;
 
 	pr_debug("pm8008_chip_probe ++++ i2c addr 0x%x",client->addr);
@@ -1007,7 +1004,7 @@ static int pm8008_chip_remove(struct i2c_client *client)
 }
 
 static const struct i2c_device_id pm8008_regulator_i2c_device_id[] = {
-	{ "qcom,pm8008-regulator", 0 },
+	{ "pm8008-regulator", 0 },
 	{ },
 };
 static const struct of_device_id pm8008_regulator_match_table[] = {

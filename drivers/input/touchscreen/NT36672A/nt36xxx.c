@@ -116,7 +116,6 @@ static void nvt_ts_late_resume(struct early_suspend *h);
 
 static int32_t nvt_ts_suspend(struct device *dev);
 static int32_t nvt_ts_resume(struct device *dev);
-static int32_t nvt_check_palm(uint8_t input_id, uint8_t *data);
 
 
 

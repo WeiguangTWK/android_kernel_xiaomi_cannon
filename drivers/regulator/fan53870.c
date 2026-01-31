@@ -422,8 +422,6 @@ static int fan53870_regulator_probe(struct i2c_client *client,
 	int rc = 0;
 	unsigned int val = 0;
 	struct regmap *regmap;
-	struct pinctrl *ppinctrl;
-	struct pinctrl_state *pins_default;
 
 	regmap = devm_regmap_init_i2c(client, &fan53870_regmap_config);
 	if (IS_ERR(regmap)) {

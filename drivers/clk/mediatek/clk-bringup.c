@@ -55,8 +55,6 @@ static int bring_up_probe(struct platform_device *pdev)
 			}
 		}
 	}
-
-fail:
 	return ret;
 }
 

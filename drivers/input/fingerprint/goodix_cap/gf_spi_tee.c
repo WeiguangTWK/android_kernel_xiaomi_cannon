@@ -115,7 +115,6 @@ static DEFINE_MUTEX(device_list_lock);
 static struct wakeup_source fp_wakesrc;
 static int cluster_num;
 //static struct ppm_limit_data *freq_to_set;
-static atomic_t boosted = ATOMIC_INIT(0);
 //static struct timer_list release_timer;
 static struct work_struct fp_display_work;
 //static struct work_struct fp_freq_work;

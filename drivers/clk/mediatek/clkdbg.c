@@ -406,8 +406,6 @@ static u32 read_spm_pwr_status(void)
 
 static s32 *read_spm_pwr_status_array(void)
 {
-	static void __iomem *scpsys_base, *pwr_sta, *pwr_sta_2nd;
-	static int pwr_sta_val[STA_NUM];
 
 	if (clkdbg_ops == NULL || clkdbg_ops->get_spm_pwr_status_array  == NULL)
 		return  ERR_PTR(-EINVAL);
@@ -736,7 +734,7 @@ const char *get_last_cmd(void)
 
 static int clkop_int_ckname(int (*clkop)(struct clk *clk),
 			const char *clkop_name, const char *clk_name,
-			struct clk *ck, struct seq_file *s)
+			struct clk *ck, struct seq_file *s) __maybe_unused
 {
 	struct clk *clk;
 
@@ -754,7 +752,7 @@ static int clkop_int_ckname(int (*clkop)(struct clk *clk),
 }
 
 static int clkdbg_clkop_int_ckname(int (*clkop)(struct clk *clk),
-			const char *clkop_name, struct seq_file *s, void *v)
+			const char *clkop_name, struct seq_file *s, void *v) __maybe_unused
 {
 	char cmd[sizeof(last_cmd)];
 	char *c = cmd;
@@ -792,7 +790,7 @@ static int clkdbg_clkop_int_ckname(int (*clkop)(struct clk *clk),
 
 static void clkop_void_ckname(void (*clkop)(struct clk *clk),
 			const char *clkop_name, const char *clk_name,
-			struct clk *ck, struct seq_file *s)
+			struct clk *ck, struct seq_file *s) __maybe_unused
 {
 	struct clk *clk;
 
@@ -810,7 +808,7 @@ static void clkop_void_ckname(void (*clkop)(struct clk *clk),
 }
 
 static int clkdbg_clkop_void_ckname(void (*clkop)(struct clk *clk),
-			const char *clkop_name, struct seq_file *s, void *v)
+			const char *clkop_name, struct seq_file *s, void *v) __maybe_unused
 {
 	char cmd[sizeof(last_cmd)];
 	char *c = cmd;
@@ -845,37 +843,37 @@ static int clkdbg_clkop_void_ckname(void (*clkop)(struct clk *clk),
 	return 0;
 }
 
-static int clkdbg_prepare(struct seq_file *s, void *v)
+static int clkdbg_prepare(struct seq_file *s, void *v) __maybe_unused
 {
 	return clkdbg_clkop_int_ckname(clk_prepare,
 					"clk_prepare", s, v);
 }
 
-static int clkdbg_unprepare(struct seq_file *s, void *v)
+static int clkdbg_unprepare(struct seq_file *s, void *v) __maybe_unused
 {
 	return clkdbg_clkop_void_ckname(clk_unprepare,
 					"clk_unprepare", s, v);
 }
 
-static int clkdbg_enable(struct seq_file *s, void *v)
+static int clkdbg_enable(struct seq_file *s, void *v) __maybe_unused
 {
 	return clkdbg_clkop_int_ckname(clk_enable,
 					"clk_enable", s, v);
 }
 
-static int clkdbg_disable(struct seq_file *s, void *v)
+static int clkdbg_disable(struct seq_file *s, void *v) __maybe_unused
 {
 	return clkdbg_clkop_void_ckname(clk_disable,
 					"clk_disable", s, v);
 }
 
-static int clkdbg_prepare_enable(struct seq_file *s, void *v)
+static int clkdbg_prepare_enable(struct seq_file *s, void *v) __maybe_unused
 {
 	return clkdbg_clkop_int_ckname(clk_prepare_enable,
 					"clk_prepare_enable", s, v);
 }
 
-static int clkdbg_disable_unprepare(struct seq_file *s, void *v)
+static int clkdbg_disable_unprepare(struct seq_file *s, void *v) __maybe_unused
 {
 	return clkdbg_clkop_void_ckname(clk_disable_unprepare,
 					"clk_disable_unprepare", s, v);
@@ -910,7 +908,7 @@ void disable_unprepare_provider(const char *pvd)
 }
 
 static void clkpvdop(void (*pvdop)(const char *), const char *clkpvdop_name,
-			struct seq_file *s)
+			struct seq_file *s) __maybe_unused
 {
 	char cmd[sizeof(last_cmd)];
 	char *c = cmd;
@@ -930,19 +928,19 @@ static void clkpvdop(void (*pvdop)(const char *), const char *clkpvdop_name,
 	seq_printf(s, "%s(%s)\n", clkpvdop_name, pvd_name);
 }
 
-static int clkdbg_prepare_enable_provider(struct seq_file *s, void *v)
+static int clkdbg_prepare_enable_provider(struct seq_file *s, void *v) __maybe_unused
 {
 	clkpvdop(prepare_enable_provider, "prepare_enable_provider", s);
 	return 0;
 }
 
-static int clkdbg_disable_unprepare_provider(struct seq_file *s, void *v)
+static int clkdbg_disable_unprepare_provider(struct seq_file *s, void *v) __maybe_unused
 {
 	clkpvdop(disable_unprepare_provider, "disable_unprepare_provider", s);
 	return 0;
 }
 
-static int clkdbg_set_parent(struct seq_file *s, void *v)
+static int clkdbg_set_parent(struct seq_file *s, void *v) __maybe_unused
 {
 	char cmd[sizeof(last_cmd)];
 	char *c = cmd;
@@ -991,7 +989,7 @@ static int clkdbg_set_parent(struct seq_file *s, void *v)
 	return r;
 }
 
-static int clkdbg_set_rate(struct seq_file *s, void *v)
+static int clkdbg_set_rate(struct seq_file *s, void *v) __maybe_unused
 {
 	char cmd[sizeof(last_cmd)];
 	char *c = cmd;
@@ -1028,7 +1026,7 @@ static int clkdbg_set_rate(struct seq_file *s, void *v)
 	return r;
 }
 
-static void *reg_from_str(const char *str)
+static void *reg_from_str(const char *str) __maybe_unused
 {
 	static phys_addr_t phys;
 	static void __iomem *virt;
@@ -1082,7 +1080,7 @@ static void *reg_from_str(const char *str)
 	return NULL;
 }
 
-static int parse_reg_val_from_cmd(void __iomem **preg, unsigned long *pval)
+static int parse_reg_val_from_cmd(void __iomem **preg, unsigned long *pval) __maybe_unused
 {
 	char cmd[sizeof(last_cmd)];
 	char *c = cmd;
@@ -1110,7 +1108,7 @@ static int parse_reg_val_from_cmd(void __iomem **preg, unsigned long *pval)
 	return r;
 }
 
-static int clkdbg_reg_read(struct seq_file *s, void *v)
+static int clkdbg_reg_read(struct seq_file *s, void *v) __maybe_unused
 {
 	void __iomem *reg;
 	unsigned long val = 0;
@@ -1126,7 +1124,7 @@ static int clkdbg_reg_read(struct seq_file *s, void *v)
 	return 0;
 }
 
-static int clkdbg_reg_write(struct seq_file *s, void *v)
+static int clkdbg_reg_write(struct seq_file *s, void *v) __maybe_unused
 {
 	void __iomem *reg;
 	unsigned long val = 0;
@@ -1143,7 +1141,7 @@ static int clkdbg_reg_write(struct seq_file *s, void *v)
 	return 0;
 }
 
-static int clkdbg_reg_set(struct seq_file *s, void *v)
+static int clkdbg_reg_set(struct seq_file *s, void *v) __maybe_unused
 {
 	void __iomem *reg;
 	unsigned long val = 0;
@@ -1160,7 +1158,7 @@ static int clkdbg_reg_set(struct seq_file *s, void *v)
 	return 0;
 }
 
-static int clkdbg_reg_clr(struct seq_file *s, void *v)
+static int clkdbg_reg_clr(struct seq_file *s, void *v) __maybe_unused
 {
 	void __iomem *reg;
 	unsigned long val = 0;

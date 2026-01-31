@@ -127,36 +127,6 @@ static int is_mt6315_S3_exist(void)
 	return ret;
 }
 
-static int is_mt6315_S6_exist(void)
-{
-	int ret = 0;
-	struct regulator *reg;
-
-	reg = regulator_get_optional(NULL, "6_vbuck1");
-	if (IS_ERR(reg))
-		return 0;
-	if (regulator_is_enabled(reg))
-		ret = 1;
-	regulator_put(reg);
-
-	return ret;
-}
-
-static int is_mt6315_S7_exist(void)
-{
-	int ret = 0;
-	struct regulator *reg;
-
-	reg = regulator_get_optional(NULL, "7_vbuck1");
-	if (IS_ERR(reg))
-		return 0;
-	if (regulator_is_enabled(reg))
-		ret = 1;
-	regulator_put(reg);
-
-	return ret;
-}
-
 int is_mt6315_exist(void)
 {
 #if defined(CONFIG_MACH_MT6885) || defined(CONFIG_MACH_MT6873) \

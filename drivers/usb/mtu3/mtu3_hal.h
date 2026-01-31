@@ -34,6 +34,7 @@ enum USB_DEV_SPEED {
 
 extern int xhci_mtk_register_plat(void);
 extern void xhci_mtk_unregister_plat(void);
+struct ssusb_mtk;
 
 extern int get_ssusb_ext_rscs(struct ssusb_mtk *ssusb);
 extern int ssusb_dual_phy_power_on(struct ssusb_mtk *ssusb,

@@ -1490,25 +1490,6 @@ unlock:
 }
 EXPORT_SYMBOL(drm_fb_helper_ioctl);
 
-static bool drm_fb_pixel_format_equal(const struct fb_var_screeninfo *var_1,
-				      const struct fb_var_screeninfo *var_2)
-{
-	return var_1->bits_per_pixel == var_2->bits_per_pixel &&
-	       var_1->grayscale == var_2->grayscale &&
-	       var_1->red.offset == var_2->red.offset &&
-	       var_1->red.length == var_2->red.length &&
-	       var_1->red.msb_right == var_2->red.msb_right &&
-	       var_1->green.offset == var_2->green.offset &&
-	       var_1->green.length == var_2->green.length &&
-	       var_1->green.msb_right == var_2->green.msb_right &&
-	       var_1->blue.offset == var_2->blue.offset &&
-	       var_1->blue.length == var_2->blue.length &&
-	       var_1->blue.msb_right == var_2->blue.msb_right &&
-	       var_1->transp.offset == var_2->transp.offset &&
-	       var_1->transp.length == var_2->transp.length &&
-	       var_1->transp.msb_right == var_2->transp.msb_right;
-}
-
 static void drm_fb_helper_fill_pixel_fmt(struct fb_var_screeninfo *var,
 					 u8 depth)
 {

@@ -43,6 +43,8 @@ extern void disp_gamma_set_bypass(struct drm_crtc *crtc, int bypass);
 extern void disp_dither_set_bypass(struct drm_crtc *crtc, int bypass);
 extern void disp_aal_set_bypass(struct drm_crtc *crtc, int bypass);
 
+struct mtk_plane_state;
+
 extern unsigned int m_new_pq_persist_property[32];
 enum mtk_pq_persist_property {
 	DISP_PQ_COLOR_BYPASS,
